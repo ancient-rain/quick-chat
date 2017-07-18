@@ -17,7 +17,6 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit(): void {
     try {
-      console.log(this.postBodyText);
       const post = new Post({
         postBody: this.postBodyText,
         authorKey: this.authService.currentUserUid,
