@@ -14,6 +14,9 @@ import { SignInComponent } from './+sign-in/sign-in.component';
 import { MyPostsComponent } from './+my-posts/my-posts.component';
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth.guard";
+import { CreatePostComponent } from './create-post/create-post.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { PostComponent } from './post/post.component';
 
 import {
   MdAutocompleteModule,
@@ -40,9 +43,6 @@ import {
   MdToolbarModule,
   MdTooltipModule
 } from '@angular/material';
-import { CreatePostComponent } from '../src/app/create-post/create-post.component';
-import { PostListComponent } from '../src/app/post-list/post-list.component';
-import { PostComponent } from '../src/app/post/post.component';
 
 export const MaterialModules = [
   MdAutocompleteModule,
