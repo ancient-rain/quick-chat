@@ -55,7 +55,6 @@ export class AuthService {
       .then((result: any) => {
         this.router.navigate(['/']);
         const user: firebase.User = result.user;
-        console.log('push the user to the db', user);
         this.authorService.updateAuthor(user.uid, user.displayName, user.photoURL);
       });
   }
