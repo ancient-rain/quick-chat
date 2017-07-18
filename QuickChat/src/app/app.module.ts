@@ -40,6 +40,9 @@ import {
   MdToolbarModule,
   MdTooltipModule
 } from '@angular/material';
+import { CreatePostComponent } from '../src/app/create-post/create-post.component';
+import { PostListComponent } from '../src/app/post-list/post-list.component';
+import { PostComponent } from '../src/app/post/post.component';
 
 export const MaterialModules = [
   MdAutocompleteModule,
@@ -72,7 +75,10 @@ export const MaterialModules = [
     AppComponent,
     MainComponent,
     SignInComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    CreatePostComponent,
+    PostListComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
