@@ -9,27 +9,43 @@ export class AuthService {
 
   public isSignedInStream: Observable<boolean>;
   public displayName: Observable<string>;
+  public photoUrl: Observable<string>;
+  public _currentUserUid: string;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
-      // if (user) {
-      // } else {
-      // }
+      if (user) {
+        this._currentUserUid = user.uid;
+      } else {
+        this._currentUserUid = '';
+      }
     });
+
     this.isSignedInStream = this.afAuth.authState
-      .map<firebase.User, boolean>((user: firebase.User) => { 
+      .map<firebase.User, boolean>((user: firebase.User) => {
         return user != null;
-     });
-     
+      });
+
     this.displayName = this.afAuth.authState
       .map<firebase.User, string>((user: firebase.User) => {
         if (user) {
           return user.displayName;
-        } else {
-          return '';
         }
+        return '';
       });
+
+    this.photoUrl = this.afAuth.authState
+      .map<firebase.User, string>((user: firebase.User) => {
+        if (user) {
+          return user.photoURL;
+        }
+        return '';
+      })
+  }
+
+  get currentUserUid(): string {
+    return this._currentUserUid;
   }
 
   signInWithGoogle(): void {
