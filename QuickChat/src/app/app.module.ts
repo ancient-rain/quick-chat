@@ -17,6 +17,8 @@ import { AuthGuard } from "./services/auth.guard";
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostComponent } from './post/post.component';
+import { PostService } from "./services/post.service";
+import { ReversePipe } from './pipes/reverse.pipe';
 
 import {
   MdAutocompleteModule,
@@ -43,7 +45,6 @@ import {
   MdToolbarModule,
   MdTooltipModule
 } from '@angular/material';
-import { PostService } from "./services/post.service";
 
 export const MaterialModules = [
   MdAutocompleteModule,
@@ -79,7 +80,8 @@ export const MaterialModules = [
     MyPostsComponent,
     CreatePostComponent,
     PostListComponent,
-    PostComponent
+    PostComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
