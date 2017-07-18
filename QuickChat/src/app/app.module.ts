@@ -43,6 +43,7 @@ import {
   MdToolbarModule,
   MdTooltipModule
 } from '@angular/material';
+import { PostService } from "./services/post.service";
 
 export const MaterialModules = [
   MdAutocompleteModule,
@@ -94,6 +95,7 @@ export const MaterialModules = [
   providers: [
     AuthService,
     AuthGuard,
+    PostService,
   ],
   bootstrap: [AppComponent]
 })

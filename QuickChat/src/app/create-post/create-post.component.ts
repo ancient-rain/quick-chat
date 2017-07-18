@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import { Post } from "../models/post";
+import { PostService } from "../services/post.service";
 
 @Component({
   selector: 'app-create-post',
@@ -10,7 +11,7 @@ import { Post } from "../models/post";
 export class CreatePostComponent implements OnInit {
   postBodyText: string;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private postService: PostService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,7 @@ export class CreatePostComponent implements OnInit {
         postBody: this.postBodyText,
         authorKey: this.authService.currentUserUid,
       });
-      console.log('TODO: submit the post', post);
+      this.postService.add(post);
       this.postBodyText = '';
     } catch (e) {
       console.log('Submit failed: ', e);
