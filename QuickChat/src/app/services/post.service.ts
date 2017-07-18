@@ -65,4 +65,8 @@ export class PostService {
   remove(keyToRemove: string) {
     this.db.object(`${this.postsPath}/${keyToRemove}`).remove();
   }
+
+  update(key: string, post: Post) {
+    this.db.object(`${this.postsPath}/${key}`).set(post);
+  }
 }
