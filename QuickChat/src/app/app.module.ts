@@ -13,6 +13,7 @@ import { MainComponent } from './+main/main.component';
 import { SignInComponent } from './+sign-in/sign-in.component';
 import { MyPostsComponent } from './+my-posts/my-posts.component';
 import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./services/auth.guard";
 
 import {
   MdAutocompleteModule,
@@ -86,6 +87,7 @@ export const MaterialModules = [
   ],
   providers: [
     AuthService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })
