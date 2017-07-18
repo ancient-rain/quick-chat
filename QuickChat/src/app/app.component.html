@@ -7,14 +7,13 @@
       <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/']">All posts</a>
       <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/myposts']">My posts</a>
       <hr>
-      <a md-list-item (click)="sidenav.toggle()">Sign out</a>
+      <a md-list-item (click)="sidenav.toggle();authService.signOut();">Sign out</a>
     </md-nav-list>
   </md-sidenav>
   <md-toolbar color="primary">
     <button md-icon-button (click)="sidenav.toggle()">
       <md-icon>menu</md-icon>
-    </button>
-    Quick Chat
+    </button> Quick Chat
   </md-toolbar>
   <router-outlet></router-outlet>
 </md-sidenav-container>

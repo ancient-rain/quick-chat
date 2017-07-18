@@ -12,6 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MainComponent } from './+main/main.component';
 import { SignInComponent } from './+sign-in/sign-in.component';
 import { MyPostsComponent } from './+my-posts/my-posts.component';
+import { AuthService } from "./services/auth.service";
 
 import {
   MdAutocompleteModule,
@@ -83,7 +84,9 @@ export const MaterialModules = [
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
