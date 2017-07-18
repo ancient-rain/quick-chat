@@ -61,4 +61,8 @@ export class PostService {
   displayMorePosts() {
     this.postIncrementStream.next(this.postBatchSize);
   }
+
+  remove(keyToRemove: string) {
+    this.db.object(`${this.postsPath}/${keyToRemove}`).remove();
+  }
 }
