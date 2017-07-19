@@ -10,32 +10,52 @@ import { Author } from "../models/author";
 import { Subject } from "rxjs/Subject";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import * as firebase from 'firebase/app';
+import { AuthService } from "./auth.service";
+import { Query } from "angularfire2/interfaces";
 
 @Injectable()
 export class PostService {
   readonly postsPath = 'posts';
   readonly postBatchSize = 20;
   private postIncrementStream: Subject<number>;
+  private isMyPostPageStream: Subject<boolean>;
 
   postsWithAuthorStream: Observable<PostWithAuthor[]>;
   hideLoadMoreBtn = false;
 
   constructor(private db: AngularFireDatabase,
-    private authorService: AuthorService) {
+    private authorService: AuthorService,
+    private authService: AuthService) {
     this.postIncrementStream = new BehaviorSubject<number>(this.postBatchSize);
+    this.isMyPostPageStream = new BehaviorSubject<boolean>(false);
 
     const numPostsStream: Observable<number> = this.postIncrementStream
       .scan<number>((previousTotal: number, currentValue: number) => {
         return previousTotal + currentValue;
       });
 
-    const postsStream: Observable<Post[]> = numPostsStream
-      .switchMap<number, Post[]>((numPosts: number) => {
-        return this.db.list(this.postsPath, {
-          query: {
+    const queryStream: Observable<Query> = Observable.combineLatest<Query>(
+      numPostsStream,
+      this.isMyPostPageStream,
+      (numPosts: number, isMyPostPage: boolean) => {
+        if (isMyPostPage) {
+          return {
+            orderByChild: 'authorKey',
+            equalTo: this.authService.currentUserUid,
+          };
+        } else {
+          return {
             limitToLast: numPosts,
-          }
-        })
+          };
+        }
+      }
+    );
+
+    const postsStream: Observable<Post[]> = queryStream
+      .switchMap<Query, Post[]>((queryParameter: Query) => {
+        return this.db.list(this.postsPath, {
+          query: queryParameter
+        });
       });
 
     this.postsWithAuthorStream = Observable.combineLatest<PostWithAuthor[]>(
@@ -68,5 +88,9 @@ export class PostService {
 
   update(key: string, post: Post) {
     this.db.object(`${this.postsPath}/${key}`).set(post);
+  }
+
+  showOnlyMyPosts(isMyPostPage: boolean) {
+    this.isMyPostPageStream.next(isMyPostPage);
   }
 }
