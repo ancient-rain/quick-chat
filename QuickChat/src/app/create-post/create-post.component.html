@@ -1,6 +1,6 @@
 <md-card fxLayout="row">
   <img *ngIf="authService.photoUrl;else noPhotoTemplate" [src]="authService.photoUrl | async" alt="Google profile photo">
-  <ng-template>
+  <ng-template #noPhotoTemplate>
     <img src="/assets/images/missing_photo.png" alt="Missing photo">
   </ng-template>
   <form fxFlex fxLayout (ngSubmit)="onSubmit()">

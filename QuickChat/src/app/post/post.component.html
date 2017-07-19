@@ -1,6 +1,6 @@
 <div class="post" fxLayout="row" fxLayoutAlign="none stretch">
   <img *ngIf="postWithAuthor.author.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile photo">
-  <ng-template>
+  <ng-template #noPhotoTemplate>
     <img src="/assets/images/missing_photo.png" alt="Missing photo">
   </ng-template>
   <div fxFlex fxLayout="column">
@@ -18,7 +18,7 @@
       <md-icon>delete</md-icon>
     </button>
   </div>
-  <div *ngIf="editingMode==2" fxLayout="row">
+  <div *ngIf="editingMode==2" fxLayout="row" #editingModeTemplate>
     <button [disabled]="updatedPostBody==postWithAuthor.postBody" md-icon-button (click)="save()">
       <md-icon>save</md-icon>
     </button>
