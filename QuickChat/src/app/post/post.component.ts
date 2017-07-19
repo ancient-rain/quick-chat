@@ -19,6 +19,7 @@ export class PostComponent implements OnInit {
   @Input() postWithAuthor: PostWithAuthor;
 
   editingMode = EditMode.notEditable;
+  updatedPostBody: string;
 
   constructor(private authService: AuthService,
     private postService: PostService,
@@ -33,7 +34,8 @@ export class PostComponent implements OnInit {
   }
 
   enableEditing() {
-    console.log('TODO: Enable the edit mode');
+    this.editingMode = EditMode.editing;
+    this.updatedPostBody = this.postWithAuthor.postBody;
   }
 
   remove() {
@@ -43,15 +45,27 @@ export class PostComponent implements OnInit {
     });
     snackBarRef.onAction().subscribe(() => {
       const restoredPost = new Post();
-      
+
       restoredPost.postBody = this.postWithAuthor.postBody;
       restoredPost.authorKey = this.authService.currentUserUid;
-      
+
       this.postService.update(this.postWithAuthor.$key, restoredPost);
-      
+
       this.snackBar.open('Post restored!', '', {
-      duration: 3000,
+        duration: 3000,
+      });
     });
-    });
+  }
+
+  save() {
+    const updatedPost = new Post();
+    updatedPost.postBody = this.updatedPostBody;
+    updatedPost.authorKey = this.authService.currentUserUid;
+    this.postService.update(this.postWithAuthor.$key, updatedPost);
+    this.editingMode = EditMode.displayEditButtons;
+  }
+
+  cancel() {
+    this.editingMode = EditMode.displayEditButtons;
   }
 }
