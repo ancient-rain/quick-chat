@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Post, PostWithAuthor } from "../models/post";
-import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
-import { Observable } from "rxjs/Observable";
+import { Post, PostWithAuthor } from '../models/post';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/scan';
-import 'rxjs/add/operator/switchMap'
-import { AuthorService } from "./author.service";
-import { Author } from "../models/author";
-import { Subject } from "rxjs/Subject";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import 'rxjs/add/operator/switchMap';
+import { AuthorService } from './author.service';
+import { Author } from '../models/author';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as firebase from 'firebase/app';
-import { AuthService } from "./auth.service";
-import { Query } from "angularfire2/interfaces";
+import { AuthService } from './auth.service';
+import { Query } from 'angularfire2/interfaces';
 
 @Injectable()
 export class PostService {
@@ -65,7 +65,7 @@ export class PostService {
       (posts: Post[], authorMap: Map<string, Author>, numPostsRequested: number) => {
         const postsWithAuthor: PostWithAuthor[] = [];
         this.hideLoadMoreBtn = numPostsRequested > posts.length;
-        for (let post of posts) {
+        for (const post of posts) {
           const postWithAuthor = new PostWithAuthor(post);
           postWithAuthor.author = authorMap[post.authorKey];
           postsWithAuthor.push(postWithAuthor);

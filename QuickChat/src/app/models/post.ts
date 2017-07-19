@@ -1,5 +1,5 @@
-import { FirebaseFlatSnapshot } from "./firebase-flat-snapshot";
-import { Author } from "./author";
+import { FirebaseFlatSnapshot } from './firebase-flat-snapshot';
+import { Author } from './author';
 
 export class Post extends FirebaseFlatSnapshot {
     public authorKey: string;
@@ -7,8 +7,8 @@ export class Post extends FirebaseFlatSnapshot {
 
     constructor(obj?: any) {
         super(obj);
-        this.authorKey = obj && obj.authorKey || "";
-        this.postBody = obj && obj.postBody || "";
+        this.authorKey = obj && obj.authorKey || '';
+        this.postBody = obj && obj.postBody || '';
     }
 }
 

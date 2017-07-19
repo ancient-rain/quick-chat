@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
-import { AuthorService } from "./author.service";
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { AuthorService } from './author.service';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +43,7 @@ export class AuthService {
           return user.photoURL;
         }
         return '';
-      })
+      });
   }
 
   get currentUserUid(): string {

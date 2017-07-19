@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post, PostWithAuthor } from "../models/post";
-import { AuthService } from "../services/auth.service";
-import { PostService } from "../services/post.service";
-import { MdSnackBar } from "@angular/material";
+import { Post, PostWithAuthor } from '../models/post';
+import { AuthService } from '../services/auth.service';
+import { PostService } from '../services/post.service';
+import { MdSnackBar } from '@angular/material';
 
 enum EditMode {
   notEditable = 0,
@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.postWithAuthor.authorKey == this.authService.currentUserUid) {
+    if (this.postWithAuthor.authorKey === this.authService.currentUserUid) {
       this.editingMode = EditMode.displayEditButtons;
     }
   }

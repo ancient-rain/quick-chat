@@ -1,4 +1,4 @@
-import { FirebaseFlatSnapshot } from "./firebase-flat-snapshot";
+import { FirebaseFlatSnapshot } from './firebase-flat-snapshot';
 
 export class Author extends FirebaseFlatSnapshot {
     public displayName: string;
@@ -6,7 +6,7 @@ export class Author extends FirebaseFlatSnapshot {
 
     constructor(obj?: any) {
         super(obj);
-        this.displayName = obj && obj.displayName || "";
-        this.photoUrl = obj && obj.photoUrl || "";
+        this.displayName = obj && obj.displayName || '';
+        this.photoUrl = obj && obj.photoUrl || '';
     }
 }
