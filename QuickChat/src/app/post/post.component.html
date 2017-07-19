@@ -6,9 +6,12 @@
   <div fxFlex fxLayout="column">
     <div class="author-name" fxFlex>{{ postWithAuthor.author.displayName }}</div>
     <div *ngIf="editingMode!=2;else editingModeTemplate" class="post-body" fxFlex> {{ postWithAuthor.postBody }}</div>
+    <ng-template #editingModeTemplate>
       <md-input-container [class.hide]="editingMode!=2" dividerColor="accent">
-        <input #updateInputEl mdInput type="text" placeholder="Edit your post" (keyup.enter)="save()" [(ngModel)]="updatedPostBody" name="updatedPostBody">
+        <input #updateInputEl mdInput type="text" placeholder="Edit your post" (keyup.enter)="save()" [(ngModel)]="updatedPostBody"
+          name="updatedPostBody">
       </md-input-container>
+    </ng-template>
   </div>
   <div *ngIf="editingMode==1" fxLayout="row">
     <button md-icon-button (click)="enableEditing(updateInputEl)">
@@ -18,7 +21,7 @@
       <md-icon>delete</md-icon>
     </button>
   </div>
-  <div *ngIf="editingMode==2" fxLayout="row" #editingModeTemplate>
+  <div *ngIf="editingMode==2" fxLayout="row">
     <button [disabled]="updatedPostBody==postWithAuthor.postBody" md-icon-button (click)="save()">
       <md-icon>save</md-icon>
     </button>
